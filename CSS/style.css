@@ -45,10 +45,7 @@
   margin: 10px 0;
   cursor: pointer;
 }
-/* .users_container div:hover {
-  background-color: rgb(163, 212, 255);
-  border-color: white;
-} */
+
 
 /* Start  messages_container*/
 .messages_container {
@@ -58,7 +55,7 @@
   border: 3px solid black;
   border-radius: 20px;
 }
-.messages_container > div {
+.messages_container > div:not(.messages_loading) {
   padding: 10px;
   border-radius: 10px;
   font-weight: 800;
@@ -68,4 +65,34 @@
 .messages_container > div hr {
   border: none; /* Remove the default border */
   border-top: 3px solid rgb(240, 240, 240);
+}
+
+
+
+
+
+@media (max-width : 667px) {
+  body{
+    margin: 1.5px;
+  }
+.project_container {
+  font-size: 13px;
+  justify-content: flex-start;
+
+}
+  .users_container div {
+    width: 120px; 
+    border: 2.5px solid rgb(0, 0, 0);
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin: 7px 0;
+    overflow: hidden;
+  }
+.messages_container {
+  margin-left: 10px;
+  padding: 5px;
+  overflow: hidden;
+  border: 1.5px solid black;
+
+}
 }

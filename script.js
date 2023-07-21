@@ -5,6 +5,22 @@ const usersContainer = document.querySelector(".users_container");
 const messagesContainer = document.querySelector(".messages_container");
 var current_userId = 1;
 
+function defaulat_messages_loading(){
+  return new Promise((resolve)=>{
+    messagesContainer.innerHTML = `
+    <div class="messages_loading">
+        <div class="lds-ring lds-ring-black">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    `;
+  resolve();
+  }
+  )  
+}
 function error_bg(err) {
   document.querySelector(".loading").style.display = "none";
   document.querySelector(".project_container").style.display = "flex";
@@ -117,13 +133,24 @@ function initilise_childs_users(callBack) {
   });
 }
 
-function initilise_childs_messages(current_userId) {
+function initilise_childs_messages() {
+   messagesContainer.innerHTML = `
+    <div class="messages_loading">
+        <div class="lds-ring lds-ring-black">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    `;
   initilise_childs_users(function (current_userId) {
     document.querySelector(".loading").style.display = "none";
     document.querySelector(".project_container").style.display = "flex";
     document.querySelector("body").style.backgroundColor = "white";
 
     Posts_requist_connection(current_userId, function (res) {
+     messagesContainer.innerHTML = ``;
       for (r of res) {
         Posts_table.push(r);
       }
@@ -145,10 +172,20 @@ function initilise_childs_messages(current_userId) {
 
 function update_content(current_userId) {
   // Clear the existing messages content
-  messagesContainer.innerHTML = "";
+  messagesContainer.innerHTML = `
+  <div class="messages_loading">
+      <div class="lds-ring lds-ring-black">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  `;
 
   // Get the posts for the selected user
   Posts_requist_connection(current_userId, function (res) {
+    messagesContainer.innerHTML = "";
     for (const post of res) {
       const node = document.createElement("div");
       const hr = document.createElement("hr");
